@@ -4,9 +4,12 @@
 import PackageDescription
 
 let package = Package(
-  name: "content-bot",
+  name: "ContentBot",
   platforms: [
     .macOS(.v10_12),
+  ],
+  products: [
+    .library(name: "ContentBot", targets: ["ContentBot"]),
   ],
   dependencies: [
     // Dependencies declare other packages that this package depends on.
@@ -25,7 +28,7 @@ let package = Package(
   targets: [
     // Targets are the basic building blocks of a package. A target can define a module or a test suite.
     // Targets can depend on other targets in this package, and on products in packages which this package depends on.
-    .target(name: "blog-bot", dependencies: [
+    .target(name: "ContentBot", dependencies: [
       "Kitura",
       "Down",
       "HeliumLogger",
@@ -34,7 +37,8 @@ let package = Package(
       "RxCocoa",
       "Cryptor",
     ]),
-    .testTarget(name: "blog-botTests", dependencies: ["blog-bot"]),
+    .target(name: "ContentBotExe", dependencies: ["ContentBot"]),
+    .testTarget(name: "ContentBotTests", dependencies: ["ContentBot"]),
   ]
 )
 

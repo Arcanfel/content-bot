@@ -17,3 +17,9 @@
 - `swift build` to compile the code
 - `swift run` to run the compiled application
 - `swift run swiftformat` to format the codex
+
+
+## Tips
+- XCTestCase requires static `allTests` property in order for tests to be 
+discovarable on Linux. The reason for this is a lack for Objective-C runtime
+on mentioned operating system. More details - https://oleb.net/blog/2017/03/keeping-xctest-in-sync/

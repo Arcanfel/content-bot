@@ -1,11 +1,14 @@
 import Foundation
 
-enum AppError: Error {
+public enum AppError: Error {
+  case failedToLoadConfig(String)
   case urlRequestFailed((URLRequest, URLResponse?))
   case failedToConstructUrl(String)
 
   var localizedDescription: String {
     switch self {
+    case let .failedToLoadConfig(configPath):
+      return "failed to load configuration at \(configPath)"
     case .urlRequestFailed((let request, _)):
       let method = request.httpMethod ?? ""
       let url = request.url?.absoluteString ?? ""

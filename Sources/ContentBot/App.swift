@@ -2,7 +2,7 @@ import Foundation
 import LoggerAPI
 import RxSwift
 
-class App {
+public class App {
   let server: Server = Server()
   let configuration: AppConfiguration
   let telegramBot: Bot.TelegramBot
@@ -10,9 +10,12 @@ class App {
 
   private let disposeBag = DisposeBag()
 
-  init(withAppConfiguration appConfiguration: AppConfiguration) {
-    configuration = appConfiguration
+  public init(withConfigurationPath configPath: String) throws {
+    guard let appConfiguration = try FileImporter.appConfiguration().importFile(atPath: configPath) else {
+      throw AppError.failedToLoadConfig(configPath)
+    }
 
+    configuration = appConfiguration
     telegramBot = Bot.TelegramBot(
       withTelegramBotToken: configuration.telegramBotToken,
       debug: configuration.debug
@@ -22,7 +25,7 @@ class App {
     twitterBot = Bot.TwitterBot(dataSource: Bot.TwitterBotDataSource(credentials: credentials))
   }
 
-  func start() {
+  public func start() {
     if configuration.debug {
       debug()
     } else {

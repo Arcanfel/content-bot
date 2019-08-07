@@ -9,6 +9,17 @@ protocol TwitterAuthDataSource {
   func encode(data: String, withKey key: String) -> String?
 }
 
+extension TwitterAuthDataSource {
+  func encode(data: String, withKey key: String) -> String? {
+    let encodingAlgorithm = Crypto.Algorithm.HMACSHA1(key: key)
+
+    if let signature = Crypto.encode(data: data, usingAlgorithm: encodingAlgorithm) {
+      return signature
+    }
+    return nil
+  }
+}
+
 private struct DataSource: TwitterAuthDataSource {
   var client: APIClientProtocol
 
@@ -26,15 +37,6 @@ private struct DataSource: TwitterAuthDataSource {
 
   func requestUrl() -> String {
     return ""
-  }
-
-  func encode(data: String, withKey key: String) -> String? {
-    let encodingAlgorithm = Crypto.Algorithm.HMACSHA1(key: key)
-
-    if let signature = Crypto.encode(data: data, usingAlgorithm: encodingAlgorithm) {
-      return signature
-    }
-    return nil
   }
 }
 
