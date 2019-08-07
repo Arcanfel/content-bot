@@ -15,4 +15,5 @@
 ## Commands
 - `swift package generate-xcodeproj` to generate the xcode project
 - `swift build` to compile the code
-- `swift run` to run the compiled 
+- `swift run` to run the compiled application
+- `swift run swiftformat` to format the codex

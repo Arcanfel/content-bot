@@ -3,14 +3,17 @@ import Foundation
 import HeliumLogger
 import LoggerAPI
 
-let logger = HeliumLogger()
-Log.logger = logger
+Log.logger = {
+  let logger = HeliumLogger()
+  logger.colored = true
+  return logger
+}()
 
 do {
-    let configurationPath = "\(Folder.home.path)lappin/swift/content-bot/\(Constants.appConfigurationFileName)"
-    if let configuration = try FileImporter.appConfiguration().importFile(atPath: configurationPath) {
-        _ = ContentBot(withAppConfiguration: configuration).start()
-    }
+  let configurationPath = "\(Folder.home.path)lappin/swift/content-bot/\(Constants.appConfigurationFileName)"
+  if let configuration = try FileImporter.appConfiguration().importFile(atPath: configurationPath) {
+    _ = App(withAppConfiguration: configuration).start()
+  }
 } catch {
-    print(error.localizedDescription)
+  print(error.localizedDescription)
 }
