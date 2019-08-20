@@ -60,6 +60,7 @@ final class TwitterAuthTests: XCTestCase {
       print(expectedResult)
       // XCTAssertTrue(header[0] == expectedResult)
     case .failed:
+      break
       // XCTAssert(false, "")
     }
 
