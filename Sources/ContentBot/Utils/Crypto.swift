@@ -20,10 +20,10 @@ struct Crypto {
   }
 
   private static func encodeHMACSHA1(data: String, key: String) -> String? {
-    let keyData = CryptoUtils.byteArray(fromHex: key)
-    let dataToEncode = CryptoUtils.byteArray(fromHex: data)
+    let keyData = CryptoUtils.byteArray(from: key)
+    let dataToEncode = CryptoUtils.byteArray(from: data)
 
-    if let result = HMAC(using: HMAC.Algorithm.sha256, key: keyData).update(byteArray: dataToEncode)?.final() {
+    if let result = HMAC(using: HMAC.Algorithm.sha1, key: keyData).update(byteArray: dataToEncode)?.final() {
       let data: Data = CryptoUtils.data(from: result)
       return data.base64EncodedString()
     }

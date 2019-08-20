@@ -66,7 +66,7 @@ extension API {
 
     private enum Params: String, CodingKey {
       case grantType = "grant_type"
-      case includeEntities = "include_entitites"
+      case includeEntities = "include_entities"
       case status
       case count
     }
@@ -91,7 +91,7 @@ extension API {
       )
     }
 
-    static func requestHomeFeedParams() -> [String: Any] {
+    static func requestHomeFeedParams(authHeader _: (name: API.HTTPHeader, value: String)) -> [String: Any] {
       return [
         Params.count.rawValue: 50
       ]

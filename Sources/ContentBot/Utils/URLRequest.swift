@@ -13,11 +13,15 @@ extension URLRequest {
     var curlCommand = "curl --verbose \\\n"
 
     // URL
-    curlCommand = curlCommand.appendingFormat(" '%@' \\\n", url.absoluteString)
+    url.absoluteString.withCString {
+      curlCommand = curlCommand.appendingFormat(" '%@' \\\n", $0)
+    }
 
     // Method if different from GET
     if httpMethod != "GET" {
-      curlCommand = curlCommand.appendingFormat(" -X %@ \\\n", httpMethod)
+      httpMethod.withCString {
+        curlCommand = curlCommand.appendingFormat(" -X %@ \\\n", $0)
+      }
     }
 
     // Headers
@@ -25,7 +29,9 @@ extension URLRequest {
     let allHeadersKeys = Array(allHeadersFields.keys)
     let sortedHeadersKeys = allHeadersKeys.sorted(by: <)
     for key in sortedHeadersKeys {
-      curlCommand = curlCommand.appendingFormat(" -H '%@: %@' \\\n", key, value(forHTTPHeaderField: key)!)
+      key.withCString {
+        curlCommand = curlCommand.appendingFormat(" -H '%@: %@' \\\n", $0)
+      }
     }
 
     // HTTP body
@@ -33,7 +39,9 @@ extension URLRequest {
       let httpBody = httpBody, httpBody.count > 0,
       let bodyString = String(data: httpBody, encoding: String.Encoding.utf8) {
       let escapedHttpBody = URLRequest.escapeAllSingleQuotes(bodyString)
-      curlCommand = curlCommand.appendingFormat(" --data '%@' \n", escapedHttpBody)
+      escapedHttpBody.withCString {
+        curlCommand = curlCommand.appendingFormat(" --data '%@' \n", $0)
+      }
     }
 
     return curlCommand

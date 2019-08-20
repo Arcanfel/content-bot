@@ -69,14 +69,14 @@ private extension App {
   }
 
   func devCode() {
-    //    _ = twitterBot.authenticate()
-    //      .flatMap { self.twitterBot.fetchHomeTimeline() }
-    //      .subscribe { event in
-    //        print(event)
-    //      }.disposed(by: disposeBag)
+    _ = twitterBot.authenticate()
+      .flatMap { self.twitterBot.getHomeTimeline() }
+      .subscribe { event in
+        print(event)
+      }.disposed(by: disposeBag)
 
 //    twitterBot.signRequest(endpoint: API.Twitter.Endpoint.getHomeTweets(API.Twitter.RequestHomeFeedParams()))
-    twitterBot.post(status: "Hello! Ladies + Gentlemen, a signed OAuth request!")
+//    twitterBot.post(status: "Hello! Ladies + Gentlemen, a signed OAuth request!")
   }
 
   private func prompt(message: String) -> String? {

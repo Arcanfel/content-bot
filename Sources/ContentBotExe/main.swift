@@ -11,6 +11,7 @@ Log.logger = {
 }()
 
 do {
+  print("nice!")
   let configurationPath = "\(Folder.home.path)lappin/swift/content-bot/config.json"
   try App(withConfigurationPath: configurationPath).start()
 } catch {

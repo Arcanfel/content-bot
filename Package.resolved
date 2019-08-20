@@ -38,12 +38,21 @@
         }
       },
       {
-        "package": "Down",
-        "repositoryURL": "https://github.com/iwasrobbed/Down.git",
+        "package": "Configuration",
+        "repositoryURL": "https://github.com/IBM-Swift/Configuration.git",
         "state": {
           "branch": null,
-          "revision": "0e383bc1bb1d2a6ae5a14bfab48dfdaa0f16f8bc",
-          "version": "0.8.5"
+          "revision": "da98da148509a3d7bd61fe01e7ade8926b52026b",
+          "version": "3.0.4"
+        }
+      },
+      {
+        "package": "FileKit",
+        "repositoryURL": "https://github.com/IBM-Swift/FileKit.git",
+        "state": {
+          "branch": null,
+          "revision": "26911acde61a3556b7583f84180048ea6a03973c",
+          "version": "0.0.2"
         }
       },
       {
@@ -92,6 +101,15 @@
         }
       },
       {
+        "package": "Kitura-WebSocket",
+        "repositoryURL": "https://github.com/IBM-Swift/Kitura-WebSocket.git",
+        "state": {
+          "branch": null,
+          "revision": "2595b0a9a4579e7c4abc61c52c588c4fcf988232",
+          "version": "2.1.2"
+        }
+      },
+      {
         "package": "KituraContracts",
         "repositoryURL": "https://github.com/IBM-Swift/KituraContracts.git",
         "state": {
@@ -125,6 +143,15 @@
           "branch": null,
           "revision": "f8657642dfdec9973efc79cc68bcef43a653a2bc",
           "version": "8.0.2"
+        }
+      },
+      {
+        "package": "omr-agentcore",
+        "repositoryURL": "https://github.com/RuntimeTools/omr-agentcore",
+        "state": {
+          "branch": null,
+          "revision": "5a2361ba1f005596a2bfa28de76ed4acf1e71c33",
+          "version": "3.2.4-swift4"
         }
       },
       {
@@ -182,6 +209,15 @@
         }
       },
       {
+        "package": "CloudFoundryEnv",
+        "repositoryURL": "https://github.com/IBM-Swift/Swift-cfenv.git",
+        "state": {
+          "branch": null,
+          "revision": "b6625a49d65f83036f0e9922b7e9f2fa66cb623e",
+          "version": "6.0.3"
+        }
+      },
+      {
         "package": "swift-log",
         "repositoryURL": "https://github.com/apple/swift-log.git",
         "state": {
@@ -206,6 +242,15 @@
           "branch": null,
           "revision": "740e398f9115f1f16048ea6979060f4e83a36b1c",
           "version": "0.33.0"
+        }
+      },
+      {
+        "package": "SwiftMetrics",
+        "repositoryURL": "https://github.com/RuntimeTools/SwiftMetrics.git",
+        "state": {
+          "branch": null,
+          "revision": "a8460c44d91ee25e0931be7792fed5e5c8a494a4",
+          "version": "2.6.4"
         }
       },
       {

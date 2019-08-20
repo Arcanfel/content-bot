@@ -5,7 +5,8 @@ protocol TwitterAuthDataSource {
   var client: APIClientProtocol { get set }
   func getTimestamp() -> String
   func getNonce() -> String
-  func requestUrl() -> String
+  func getEndpointUrl(_ endpoint: API.Twitter.Endpoint) -> String?
+  func getRequestUrl(forEndpoint endpoint: API.Twitter.Endpoint) -> String?
   func encode(data: String, withKey key: String) -> String?
 }
 
@@ -35,8 +36,12 @@ private struct DataSource: TwitterAuthDataSource {
     return Crypto.randomAlphanumericString()
   }
 
-  func requestUrl() -> String {
-    return ""
+  func getEndpointUrl(_ endpoint: API.Twitter.Endpoint) -> String? {
+    return client.getEndpointUrl(endpoint)?.absoluteString
+  }
+
+  func getRequestUrl(forEndpoint endpoint: API.Twitter.Endpoint) -> String? {
+    return client.getRequestUrl(forEndpoint: endpoint)?.absoluteString
   }
 }
 
@@ -63,7 +68,7 @@ extension API {
     private var authToken: String
     private var dataSource: TwitterAuthDataSource
     private static let oauthVersion = "1.0"
-    private static let algorithmName = "1.0"
+    private static let algorithmName = "HMAC-SHA1"
     private static let headerPrefix = "OAuth"
 
     init(credentials: Twitter.Credentials, authToken: String, dataSource: TwitterAuthDataSource) {
@@ -128,7 +133,11 @@ extension API {
     private func createSignatureBaseString(endpoint: Endpoint, parameterString: String) -> Single<String> {
       return Single.create { observer in
         let httpMethod = endpoint.method.rawValue.uppercased()
-        let requestUrl = self.dataSource.requestUrl()
+        guard let requestUrl = self.dataSource.getEndpointUrl(endpoint) else {
+          observer(.error(AppError.failedToConstructUrl(endpoint.path)))
+          return Disposables.create()
+        }
+
         let signatureBaseString = [
           httpMethod,
           requestUrl.urlEncode(),
@@ -143,6 +152,8 @@ extension API {
 
     private func createSigningKey() -> Single<String> {
       return Single.create { observer in
+
+        //        let signingKey = ["kAcSOqF21Fu85e7zjz7ZN2U4ZRhfV3WpwPAoE3Z7kBw", "LswwdoUaIvS8ltyTt5jkRh4J50vUPVVHtR2YPi5kE"]
         let signingKey = [self.credentials.secret, self.authToken]
           .map { $0.urlEncode() }
           .compactMap { $0 }
@@ -175,8 +186,8 @@ extension API {
           .map { [$0.key.rawValue, $0.value] }
           .map { $0.compactMap { $0.urlEncode() }.joined(separator: "=\"").appending("\"") }
           .joined(separator: ", ")
-
         let authorizationHeader = [TwitterAuth.headerPrefix, parameterString].joined(separator: " ")
+
         observer(.success(authorizationHeader))
 
         return Disposables.create()

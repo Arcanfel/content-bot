@@ -44,6 +44,10 @@ extension API {
 }
 
 extension APIClientProtocol {
+  func getEndpointUrl(_ endpoint: APIEndpoint) -> URL? {
+    return URLComponents(string: "\(baseUrl)\(endpoint.path)")?.url
+  }
+
   func getRequestUrl(forEndpoint endpoint: APIEndpoint) -> URL? {
     var urlComponents = URLComponents(string: "\(baseUrl)\(endpoint.path)")
 

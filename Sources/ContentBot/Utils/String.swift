@@ -6,7 +6,7 @@ extension String {
   }
 
   public func urlEncode() -> String? {
-    let unreserved = "-._~/?"
+    let unreserved = "-._~"
     let allowedCharacterSet = NSMutableCharacterSet.alphanumeric()
     allowedCharacterSet.removeCharacters(in: "!")
     allowedCharacterSet.addCharacters(in: unreserved)

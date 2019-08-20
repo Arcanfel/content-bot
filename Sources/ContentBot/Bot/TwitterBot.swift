@@ -40,7 +40,10 @@ extension Bot {
     }
 
     func fetchHomeTimeline() -> Single<API.Twitter.Feed> {
-      let params = API.Twitter.requestHomeFeedParams()
+      let params = API.Twitter.requestHomeFeedParams(
+        authHeader:
+        (name: API.HTTPHeader.authorization, value: authToken!)
+      )
       return client.request(endpoint: API.Twitter.Endpoint.getHomeTweets(params))
         .map(API.Twitter.Feed.self)
     }
