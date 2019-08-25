@@ -4,3 +4,4 @@
 /Packages
 /*.xcodeproj
 config.json
+/.build-ubuntu

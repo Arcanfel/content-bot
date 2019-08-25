@@ -15,7 +15,7 @@ ADD https://raw.githubusercontent.com/IBM-Swift/swift-ubuntu-docker/master/utils
 ADD https://raw.githubusercontent.com/IBM-Swift/swift-ubuntu-docker/master/utils/common-utils.sh /swift-utils/common-utils.sh
 RUN chmod -R 555 /swift-utils
 
-RUN chmod -R 555 /content-bot/iterative-dev.sh
+# RUN chmod -R 555 /content-bot/iterative-dev.sh
 
 # Create user if not root
 RUN if [ "$bx_dev_user" != root ]; then useradd -ms /bin/bash -u $bx_dev_userid $bx_dev_user; fi
@@ -27,4 +27,4 @@ RUN echo "$bx_dev_user ALL=NOPASSWD: ALL" > /etc/sudoers.d/user && \
     chmod 0440 /etc/sudoers.d/user
 
 # Bundle application source & binaries
-COPY . /content-bot
+# COPY . /content-bot

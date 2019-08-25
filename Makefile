@@ -1,7 +1,8 @@
 build:
-	swift build 
-
-build-dev-image:
-	docker build -t content-bot-dev -f Dockerfile-dev .
+	swift build
 docker-dev:
-	docker run -p 8080:8080 -it content-bot-dev bash
+	docker-compose up --build
+build-linux:
+	../swift-utils/tools-utils.sh build debug
+run-linux:
+	../swift-utils/tools-utils.sh run debug ContentBotExe

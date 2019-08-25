@@ -87,7 +87,7 @@ extension API {
         (key: .signatureMethod, value: TwitterAuth.algorithmName),
         (key: .timestamp, value: timestamp),
         (key: .token, value: authToken),
-        (key: .version, value: TwitterAuth.oauthVersion)
+        (key: .version, value: TwitterAuth.oauthVersion),
       ]
 
       return createParameterString(oauthParams: oauthParams, endpoint: endpoint)
@@ -141,7 +141,7 @@ extension API {
         let signatureBaseString = [
           httpMethod,
           requestUrl.urlEncode(),
-          parameterString.urlEncode()
+          parameterString.urlEncode(),
         ].compactMap { $0 }.joined(separator: "&")
 
         observer(.success(signatureBaseString))

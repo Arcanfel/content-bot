@@ -49,7 +49,7 @@ extension API {
         case let .postStatus(params):
           return [
             (value: params.query, encoding: .query),
-            (value: params.body, encoding: .form)
+            (value: params.body, encoding: .form),
           ]
         }
       }
@@ -93,7 +93,7 @@ extension API {
 
     static func requestHomeFeedParams(authHeader _: (name: API.HTTPHeader, value: String)) -> [String: Any] {
       return [
-        Params.count.rawValue: 50
+        Params.count.rawValue: 50,
       ]
     }
 

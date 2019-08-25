@@ -11,8 +11,10 @@ Log.logger = {
 }()
 
 do {
-  print("nice!")
-  let configurationPath = "\(Folder.home.path)lappin/swift/content-bot/config.json"
+  var configurationPath = "\(Folder.home.path)lappin/swift/content-bot/config.json"
+  #if os(Linux)
+    configurationPath = "\(Folder.current.path)config.json"
+  #endif
   try App(withConfigurationPath: configurationPath).start()
 } catch {
   print(error.localizedDescription)

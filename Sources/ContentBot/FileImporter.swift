@@ -45,7 +45,7 @@ extension FileImporter {
 extension FileImporter where Result == AppConfiguration {
   static func appConfiguration() -> FileImporter {
     return FileImporter(handlers: [
-      "json": importJsonFile
+      "json": importJsonFile,
     ])
   }
 
